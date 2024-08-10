@@ -39,7 +39,18 @@ This design allows the model to understand from context and labels, leading to m
 The final step involves creating a RAG chain by querying a pre-trained large language model (Llama 3.1-8b-instant) with the structured prompt. I have used Groqcloud LPU engine as it is faster in providing the response and is free. The model generates the most appropriate category label for the input ticket based on the provided context.
 
 ## **Rationale**
+The rationale behind this approach lies in enhancing the model's understanding through retrieval. By providing the model with labels and definitions closely related to the input, I aimed to improve its contextual comprehension and reduce the likelihood of misclassification.
+
+## **Results**
 The system demonstrated effective classification of support tickets into the correct categories. While the overall performance was robust, it was particularly strong in scenarios where the retrieved examples closely matched the input text.
+Here’s an example of how it performed on different tickets:
+
+- Input Ticket: "The app crashes very often."
+    Model Output: Category 2 - App Functionality
+- Input Ticket: "Refund not processed."
+    Model Output: Category 3 - Billing
+
+These examples illustrate the system's capability to leverage relevant context to accurately categorize different types of support tickets.
 
 ## **Potential Shortcomings and Improvements**
 1. **Knowledge Base Expansion:** The current knowledge base is static and loaded from a single file. In a production scenario, we might need a more dynamic approach where the knowledge base can be updated or expanded without restarting the application. Expanding the knowledge base with more diverse examples could further improve classification accuracy, especially for edge cases.
